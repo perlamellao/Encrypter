@@ -1,0 +1,23 @@
+{% extends 'mainvt.html' %}
+
+{% block body %}
+<h1 id="aeh1" class="text-center">SISTEMA AVANZADO DE PROTECCION DE ARCHIVOS</h1>
+<form action="/encriptar" method="POST">
+  <button id="be1" type="submit" class="btn btn-primary btn-lg" onclick="closeHelpDiv()">ENCRIPTAR</button>
+</form>
+<form action="/desencriptar" method="POST">
+  <button id="be2" type="submit" class="btn btn-primary btn-lg">DESENCRIPTAR</button>
+</form>
+
+{% block content %} {% endblock %}
+{% endblock %}
+
+{% block script %}
+<script>
+  document.getElementById("body").style.backgroundImage="url('/static/css/img/negro.png')";
+  document.getElementById("body").style.backgroundSize="100%";
+  document.getElementById("side-wrapper").style.display="grid";
+  document.getElementById("pbar").style.display="none";
+</script>
+
+{% endblock %}

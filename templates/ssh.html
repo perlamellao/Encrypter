@@ -1,0 +1,15 @@
+{% extends 'mainvt.html' %}
+{% block body %}
+
+
+<a href="/raspissh"><img id="ssh" src="/static/css/img/debian.png" class="rounded-circle" style="width:150px; height:150px;"></a>
+{% endblock %}
+
+{% block script %}
+<script>
+  document.getElementById("body").style.backgroundImage="url('/static/css/img/negro.png')";
+  document.getElementById("body").style.backgroundSize="100%";
+  document.getElementById("side-wrapper").style.display="grid";
+  document.getElementById("pbar").style.display="none";
+</script>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'mainvt.html' %}
+{% block body %}
+<form action="/sendssh" method="POST" enctype = "multipart/form-data">
+  <div id="command" class="text-center pt-4">
+      <input id="command-input" type="text" class="form-control text-center" name="command" placeholder="Escriba comando ssh">
+  </div>
+  <div class="text-center pt-4" >
+     <p><button type="submit" class="btn btn-success btn-lg" style="padding: 10px 10px 10px;">Enviar Comando</button></p>
+  </div>
+</form>
+<div>
+  <p style="color:rgba(0, 255, 0, 1);" class="text-center"><br><br><br>{{ ssh_output }}</p>
+</div>
+
+
+
+{% endblock %}
+
+
+{% block script %}
+<script>
+  document.getElementById("body").style.backgroundImage="url('/static/css/img/debian.jpg')";
+  document.getElementById("body").style.backgroundSize="100%";
+  document.getElementById("side-wrapper").style.display="grid";
+  document.getElementById("pbar").style.display="none";
+  document.getElementById("side-wrapper").style.display="none";
+</script>
+{% endblock %}

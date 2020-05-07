@@ -1,0 +1,85 @@
+#sidebar{
+  float:left;
+  background: rgba(#322f2f, 0.87);
+  box-shadow: 13px 13px 73px 0px rgba(0,0,0,0.6);
+  height: auto;
+  width: 25%;
+  text-align: center;
+  padding-top: 10px;
+}
+#list li a{
+  text-decoration:none;
+  color:#000000;
+}
+#list li a:hover{
+  text-decoration:none;
+}
+#list li:hover{
+  background-color:rgba(11, 92, 12, 1);
+}
+#sidebar-top li a{
+  text-decoration:none;
+  color:#000000;
+}
+#sidebar-top li a:hover{
+  text-decoration:none;
+}
+
+
+.sidebar-header{
+  text-decoration:none;
+  color:#000000;
+}
+.sidebar-header{
+  text-decoration:none;
+}
+#g1 {
+  width: 180px;
+  height: 180px;
+  display: inline-block;
+  position: absolute;
+  left: 200px;
+  margin: 10px;
+}
+#be1 {
+  display: inline-block;
+  position: absolute;
+  top: 35%;
+  left: 300px;
+
+}
+
+#be2 {
+  display: inline-block;
+  position: absolute;
+  top: 35%;
+  left: 500px;
+}
+
+#logout {
+  margin-bottom: 30px;
+  width: 50px;
+  height: 50px;
+}
+
+#ssh {
+  display: inline-block;
+  position: absolute;
+  top:20px;
+  left:250px;
+
+}
+
+#command {
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+
+
+#aeh1 {
+  display: inline-block;
+  position: absolute;
+  top:20px;
+  left:120px;
+}

@@ -1,0 +1,33 @@
+{% extends 'mainvt.html' %}
+{% block body %}
+<div id="g1" style="display:none;"></div>
+{% endblock %}
+{% block script %}
+<script>
+    var activos = {{ activos }};
+    var g1 = new JustGage({
+      id: "g1",
+      value: activos,
+      min: 0,
+      max: 5,
+      title: "PiBugs Conectados",
+    });
+</script>
+<script>
+  document.getElementById("pbar").style.display="block";
+  var source = new EventSource("/progress");
+  source.onmessage = function(event) {
+    $('.progress-bar').css('width', event.data+'%').attr('aria-valuenow', event.data);
+    $('.progress-bar-label').text(event.data+'%');
+      if(event.data == 100){
+        closeHelpDiv()
+        source.close()
+        document.getElementById("body").style.backgroundImage="url('/static/css/img/negro.png')";
+        document.getElementById("body").style.backgroundSize="100%";
+        document.getElementById("side-wrapper").style.display="grid";
+        document.getElementById("g1").style.display="block";
+      }
+  function closeHelpDiv(){document.getElementById("pbar").style.display="none";}
+  }
+</script>
+{% endblock %}

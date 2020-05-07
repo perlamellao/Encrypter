@@ -1,0 +1,21 @@
+{% extends 'mainvt.html' %}
+{% block body %}
+<div id="g1"></div>
+{% endblock %}
+{% block script %}
+<script>
+    var activos = {{ activos }};
+    var g1 = new JustGage({
+      id: "g1",
+      value: activos,
+      min: 0,
+      max: 4,
+      title: "Servicios Activos",
+    });
+</script>
+<script>
+  document.getElementById("body").style.backgroundImage="url('/static/css/img/negro.png')";
+  document.getElementById("side-wrapper").style.display="grid";
+  document.getElementById("pbar").style.display="none";
+</script>
+{% endblock %}

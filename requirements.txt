@@ -1,0 +1,2 @@
+pyfladesk==1.1
+pydes==2.0.1
