@@ -25,9 +25,6 @@ global PiHost1
 global COMMAND
 global act
 activos=running.check()
-
-
-
 PiHost1 = "pi@192.168.1.9"
 COMMAND = ""
 init_dir = os.path.dirname(os.path.abspath(__file__))
