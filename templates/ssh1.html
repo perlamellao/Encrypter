@@ -1,16 +1,16 @@
 {% extends 'mainvt.html' %}
 {% block body %}
 <form action="/sendssh" method="POST" enctype = "multipart/form-data">
-  <div id="command" class="text-center pt-4">
-      <input id="command-input" type="text" class="form-control text-center" name="command" placeholder="Escriba comando ssh">
-  </div>
-  <div class="text-center pt-4" >
-     <p><button type="submit" class="btn btn-success btn-lg" style="padding: 10px 10px 10px;">Enviar Comando</button></p>
+  <div id="command" class="text-center" style="">
+      <div style="display:inline-block; float:left;"><p ><button class="btn btn-warning btn-lg" style="font-size:12px;">Salir</button></p></div>
+      <div style="display:inline-block;"><input id="command-input" type="text" style="display:inline-block;" class="form-control text-center" name="command" placeholder="Escriba comando ssh"></div>
+      <p><button type="submit" class="btn btn-success btn-lg" style="margin-top:10px;display:inline-block;">Enviar Comando</button></p>
   </div>
 </form>
 <div>
   <p style="color:rgba(0, 255, 0, 1);" class="text-center"><br><br><br>{{ ssh_output }}</p>
 </div>
+
 
 
 
