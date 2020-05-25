@@ -18,15 +18,16 @@ app = Flask(__name__)
 # VARIABLES GLOBALES
 
 
-global passhsh
-global filesdir
 global init_dir
 global PiHost1
 global COMMAND
 global act
+global passhsh
+
+
+
 activos=running.check()
-
-
+passhsh = "f5a617102abb078c922452642ea57f3b"
 PiHost1 = "pi@192.168.1.9"
 COMMAND = ""
 init_dir = os.path.dirname(os.path.abspath(__file__))
@@ -70,31 +71,21 @@ def desencriptar():
     desencriptaFiles(str(passhsh))
     return render_template('enddecrypt.html')
 
-
 @app.route('/main')
-def main():
-    res = subprocess.run(['ls', '/volumes'], stdout=subprocess.PIPE)
-    resd = res.stdout.decode('UTF-8')
-    if resd[0] == "6":
-        return render_template('connected.html')
-    else:
-        return render_template('error.html')
-
+def log():
+    return render_template('login.html')
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
-    global passhsh
-    global filesdir
-    res = subprocess.run(['ls', '/volumes'], stdout=subprocess.PIPE)
-    resd = res.stdout.decode('UTF-8')
     if request.method == 'POST':
-        passwd = request.form['passwd']
-        passhsh = int(hashlib.sha256(passwd.encode('utf-8')).hexdigest(), 16) % 10**8
-        if str(passhsh) == str(resd.splitlines()[0]):
-            filesdir = "/Volumes/"+str(passhsh)+"/files"
+        passwd_tmp = request.form['passwd']
+        hsh_tmp = hashlib.md5(passwd_tmp.encode()).hexdigest()
+        if passhsh == hsh_tmp:
             return render_template('mainv0.html', activos=activos)
         else:
             return render_template('errorpopup.html')
+
+
 
 @app.route('/sendssh', methods=['POST', 'GET'])
 def sendssh():
