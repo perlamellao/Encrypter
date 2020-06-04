@@ -1,4 +1,4 @@
 test/
 **/.DS_Store
-static/files/__pycache__/
+static/files/__pycache__
 acuerdate.md

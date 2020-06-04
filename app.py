@@ -23,9 +23,9 @@ app = Flask(__name__)
 global init_dir
 global act
 global passhsh
+global debian
 
-
-
+debian="/static/css/img/debian.png"
 passhsh = "f5a617102abb078c922452642ea57f3b"
 init_dir = os.path.dirname(os.path.abspath(__file__))
 # RUTAS DE LA APLICACIÓN WEBVIEW
@@ -35,10 +35,11 @@ init_dir = os.path.dirname(os.path.abspath(__file__))
 def index():
     return render_template('init.html')
 
-@app.route('/sshb')
+'''@app.route('/sshb')
 def sshb():
+    checkonline()
     return render_template('ssh.html', on_off=on_off, inet_connection=inet_connection)
-
+'''
 
 @app.route('/home')
 def home():
@@ -51,11 +52,13 @@ def raspissh():
 
 @app.route('/ssh')
 def ssh():
-    return render_template('ssh.html', on_off=on_off, inet_connection=inet_connection)
+    checkonline()
+    return render_template('ssh.html', on_off=on_off, inet_connection=inet_connection, debian=debian)
 
 
 @app.route('/archivoe')
 def archivoe():
+    checkonline()
     return render_template('archivoe.html', on_off=on_off, inet_connection=inet_connection)
 
 
@@ -119,14 +122,22 @@ def checkonline():
     global activos
     global on_off
     global inet_connection
+    global debian
     try:
         activos=running.check()
+        if activos > 1:
+            debian="/static/css/img/debian.png"
+        else:
+            debian="/static/css/img/debian_off.png"
         inet_connection='Modo Online'
+
         on_off=''
     except:
         activos=0
         on_off='disconnected'
+        debian="/static/css/img/debian.png"
         inet_connection='Modo Offline'
+
 
 def encriptaFiles(user_pass):
     os.chdir(filesdir)
