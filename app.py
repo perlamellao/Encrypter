@@ -1,5 +1,7 @@
 from flask import Flask, render_template, flash, redirect, url_for, session, logging, request, Response
 import static.files.running as running
+import requests
+from urllib.request import urlopen
 import os
 from pyDes import des
 from pyfladesk import init_gui
@@ -19,17 +21,12 @@ app = Flask(__name__)
 
 
 global init_dir
-global PiHost1
-global COMMAND
 global act
 global passhsh
 
 
 
-activos=running.check()
 passhsh = "f5a617102abb078c922452642ea57f3b"
-PiHost1 = "pi@192.168.1.9"
-COMMAND = ""
 init_dir = os.path.dirname(os.path.abspath(__file__))
 # RUTAS DE LA APLICACIÓN WEBVIEW
 
@@ -38,11 +35,15 @@ init_dir = os.path.dirname(os.path.abspath(__file__))
 def index():
     return render_template('init.html')
 
+@app.route('/sshb')
+def sshb():
+    return render_template('ssh.html', on_off=on_off, inet_connection=inet_connection)
+
 
 @app.route('/home')
 def home():
-    activos=running.check()
-    return render_template('mainv1.html', activos=activos)
+    checkonline()
+    return render_template('mainv1.html', activos=activos, on_off=on_off, inet_connection=inet_connection)
 
 @app.route('/raspissh')
 def raspissh():
@@ -50,12 +51,12 @@ def raspissh():
 
 @app.route('/ssh')
 def ssh():
-    return render_template('ssh.html')
+    return render_template('ssh.html', on_off=on_off, inet_connection=inet_connection)
 
 
 @app.route('/archivoe')
 def archivoe():
-    return render_template('archivoe.html')
+    return render_template('archivoe.html', on_off=on_off, inet_connection=inet_connection)
 
 
 @app.route('/encriptar', methods=['POST', 'GET'])
@@ -81,7 +82,7 @@ def login():
         passwd_tmp = request.form['passwd']
         hsh_tmp = hashlib.md5(passwd_tmp.encode()).hexdigest()
         if passhsh == hsh_tmp:
-            return render_template('mainv0.html', activos=activos)
+            return render_template('mainv0.html', activos=activos, on_off=on_off, inet_connection=inet_connection)
         else:
             return render_template('errorpopup.html')
 
@@ -89,19 +90,12 @@ def login():
 
 @app.route('/sendssh', methods=['POST', 'GET'])
 def sendssh():
-    global PiHost1
-    global COMMAND
-    global result
-    COMMAND = request.form['command']
-    try:
-        with subprocess.Popen(["ssh", "%s" % PiHost1, COMMAND], shell=False,stdout=subprocess.PIPE,stderr=subprocess.PIPE) as ssh:
-            global result
-            result = ssh.stdout.readlines()
-        stringlist=[x.decode('utf-8') for x in result]
-        fullStr = ''.join(stringlist)
-    except:
-        fullStr = "Ha ocurrido un error"
-    return render_template('ssh1.html', ssh_output=fullStr)
+    command = request.form['command']
+    requests.post("http://p3rl4.me:1324/sendssh", data={'command': command})
+    time.sleep(3)
+    sshobj = urlopen('http://p3rl4.me:1324/sendssh')
+    output = sshobj.read().decode('utf-8')
+    return render_template('ssh1.html', ssh_output=output)
 
 
 @app.route('/progress')
@@ -121,7 +115,18 @@ def logout():
     return render_template('logout.html')
 
 # FUNCIONES
-
+def checkonline():
+    global activos
+    global on_off
+    global inet_connection
+    try:
+        activos=running.check()
+        inet_connection='Modo Online'
+        on_off=''
+    except:
+        activos=0
+        on_off='disconnected'
+        inet_connection='Modo Offline'
 
 def encriptaFiles(user_pass):
     os.chdir(filesdir)
@@ -156,4 +161,5 @@ def desencriptaFiles(user_pass):
 # INICIAR GUI
 
 if __name__ == '__main__':
+    checkonline()
     init_gui(app, window_title="PerlaVault", height=489, width=881)

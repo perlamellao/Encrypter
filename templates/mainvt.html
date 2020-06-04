@@ -15,7 +15,6 @@
 		</div>
     {% block body %} {% endblock %}
     <div class="wrapper" id="side-wrapper" style="display:none;">
-        <!-- Sidebar -->
         <nav id="sidebar" style=" background-color:rgba(0, 255, 0, 1);">
             <ul class="list-unstyled components" id="sidebar-top">
               <li><a href="/home" style="text-decoration:none;"><img src="/static/css/img/panel.png" style="width:180px"></a></li>
@@ -24,13 +23,10 @@
             <ul class="list-unstyled components" id="list">
                 <a href="/logout"><img src="/static/css/img/logout_btn.png" id="logout"></a>
                 <li>
-                    <a href="/ssh">SSH CONTROL</a>
+                    <a href="/ssh" class="{{on_off}}">SSH CONTROL</a>
                 </li>
                 <li>
-                    <a href="/archivoe">ArchivoE</a>
-                </li>
-                <li>
-                    <a href="#">#####</a>
+                    <a href="/archivoe" class="{{on_off}}">ArchivoE</a>
                 </li>
                 <li>
                     <a href="#">#####</a>
@@ -38,6 +34,10 @@
                 <li>
                     <a href="#">#####</a>
                 </li>
+                <li>
+                    <a href="#">#####</a>
+                </li>
+                <p class="list-unstyled components" style="text-align:center;">{{inet_connection}}</p>
             </ul>
         </nav>
     </div>
@@ -53,6 +53,9 @@
     <script src="{{ url_for('static',filename='js/tether.min.js') }}"></script>
     <script src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
     <script src="{{ url_for('static',filename='js/scripts.js') }}"></script>
+
+
+
     {% block script %} {% endblock %}
 
 

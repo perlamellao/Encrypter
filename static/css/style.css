@@ -83,3 +83,10 @@
   top:20px;
   left:120px;
 }
+
+
+
+a.disconnected {
+  pointer-events: none;
+  cursor: default;
+}
