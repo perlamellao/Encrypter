@@ -50,7 +50,7 @@ def raspissh():
 @app.route('/ssh')
 def ssh():
     checkonline()
-    return render_template('ssh.html', on_off=on_off, inet_connection=inet_connection, debian=debian)
+    return render_template('ssh.html', on_off_ssh=on_off_ssh, inet_connection=inet_connection, debian=debian)
 
 
 @app.route('/archivoe')
@@ -118,14 +118,17 @@ def logout():
 def checkonline():
     global activos
     global on_off
+    global on_off_ssh
     global inet_connection
     global debian
     try:
         activos=running.check()
-        if activos > 1:
+        if activos > 0:
             debian="/static/css/img/debian.png"
+            on_off_ssh=''
         else:
             debian="/static/css/img/debian_off.png"
+            on_off_ssh='disconnected'
         inet_connection='Modo Online'
 
         on_off=''
