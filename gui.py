@@ -1,8 +1,8 @@
 from flask import Flask, render_template, flash, redirect, url_for, session, logging, request, Response
-import static.files.running as running
 import requests
 from urllib.request import urlopen
 import os
+import static.files.running as running
 from pyDes import des
 from pyfladesk import init_gui
 import subprocess
@@ -167,10 +167,3 @@ def desencriptaFiles(user_pass):
         f.close()
     os.chdir(init_dir)
     return True
-
-
-# INICIAR GUI
-
-if __name__ == '__main__':
-    checkonline()
-    init_gui(app, window_title="PerlaVault", height=489, width=881)
