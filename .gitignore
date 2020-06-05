@@ -1,4 +1,3 @@
 test/
 **/.DS_Store
-static/files/__pycache__
-acuerdate.md
+static/files/__pycache__/

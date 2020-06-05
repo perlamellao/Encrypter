@@ -35,20 +35,17 @@ init_dir = os.path.dirname(os.path.abspath(__file__))
 def index():
     return render_template('init.html')
 
-'''@app.route('/sshb')
-def sshb():
-    checkonline()
-    return render_template('ssh.html', on_off=on_off, inet_connection=inet_connection)
-'''
 
 @app.route('/home')
 def home():
     checkonline()
     return render_template('mainv1.html', activos=activos, on_off=on_off, inet_connection=inet_connection)
 
+
 @app.route('/raspissh')
 def raspissh():
     return render_template('ssh1.html')
+
 
 @app.route('/ssh')
 def ssh():
