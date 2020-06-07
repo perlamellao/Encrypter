@@ -3,3 +3,4 @@ test/
 static/files/__pycache__/
 acuerdate.md
 **/test.*
+__pycache__/
