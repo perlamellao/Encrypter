@@ -16,7 +16,6 @@ import sys
 # Crear instancia Flask
 app = Flask(__name__)
 
-
 # VARIABLES GLOBALES
 
 
