@@ -1,5 +1,6 @@
 #sidebar{
   float:left;
+  position: static;
   background: rgba(#322f2f, 0.87);
   box-shadow: 13px 13px 73px 0px rgba(0,0,0,0.6);
   height: auto;
@@ -32,6 +33,13 @@
 }
 .sidebar-header{
   text-decoration:none;
+}
+#h5lel {
+  border-radius: 25px;
+  background:lime;
+  padding: 20px;
+  width: 225px;
+  height: 85px;
 }
 #g1 {
   width: 180px;
@@ -69,6 +77,12 @@
   left:250px;
 
 }
+#keypad {
+  display: inline-block;
+  position: absolute;
+  top:20px;
+  left:250px;
+}
 
 #command {
   padding-left: 20%;
@@ -86,7 +100,7 @@
 
 
 
-a.disconnected {
+.disconnected {
   pointer-events: none;
   cursor: default;
 }
