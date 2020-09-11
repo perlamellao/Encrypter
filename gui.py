@@ -96,14 +96,15 @@ def tgtbotrun():
     if request.method == 'POST':
         botno = request.form['botno']
         if botno == "":
-            errortxt="POR FAVOR INTRODUCE ALGÚN ID"
+            errortxt="POR FAVOR INTRODUCE ALGÚN ID VALIDO"
             return render_template('boterror.html', on_off_ssh=on_off_ssh, inet_connection=inet_connection, errortxt=errortxt)
-        if  int(botno) > activos:
+        elif int(botno) > activos:
             errortxt="EL ID INTRODUCIDO NO SE ENCUENTRA ONLINE"
             return render_template('boterror.html', on_off_ssh=on_off_ssh, inet_connection=inet_connection, errortxt=errortxt)
-
-    return render_template('tgtbot.html')
-
+        elif int(botno) == 0:
+            errortxt="POR FAVOR INTRODUCE ALGÚN ID VALIDO"
+            return render_template('boterror.html', on_off_ssh=on_off_ssh, inet_connection=inet_connection, errortxt=errortxt)
+    return render_template('tgtbotssh.html', on_off_ssh=on_off_ssh, inet_connection=inet_connection)
 
 
 @app.route('/sendssh', methods=['POST', 'GET'])
